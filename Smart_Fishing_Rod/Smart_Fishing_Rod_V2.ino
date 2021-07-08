@@ -4,12 +4,6 @@
 #define BUZZER 10
 #define LED2 8
 
-char noteNames[] = {'C','D','E','F','G','a','b','c'};
-int frequency[] = {1047,1175,1319,1397,1568,1760,1976,2093}; 
-byte noteCount = sizeof(noteNames);
-char score[] = "CCGGaaGFFEEDDC  GGFFEEDGGFFEED  CCGGaaGFFEEDDC";
-byte scoreLen = sizeof(score);
- 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -22,32 +16,20 @@ void setup() {
   digitalWrite(LED, LOW);
 }
 
-void playNote(char note, int duration){
-  for (int i=0 ; i<noteCount ; i++)
-  {
-    if (noteNames[i] == note)
-    {
-      tone(BUZZER, frequency[i], duration);
-    }
-  }
-  delay(duration);
-}
-
 void loop() {
   // put your main code here, to run repeatedly:
   int up = digitalRead(COUNT);
+  int led2 = 0;
   Serial.print("--");
   Serial.println(up);
-  if(up == LOW){
+  if(up == LOW)
+  {
+    led2 = 1 - led2;
+    
+  }
+  if(led2 == 1)
+  {
     digitalWrite(LED2, HIGH);
-    for (int i=0 ; i<scoreLen ; i++)
-    {
-         int duration = 333;
-         playNote(score[i], duration);
-     }
-     delay(300);
-     digitalWrite(LED2, LOW);
-     delay(100);
   }
   int bite = analogRead(VIBE);
   Serial.println(bite);
