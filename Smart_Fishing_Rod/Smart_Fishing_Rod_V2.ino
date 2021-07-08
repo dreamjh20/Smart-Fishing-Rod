@@ -1,8 +1,8 @@
 #define VIBE A0
-#define COUNT 11
-#define LED 12
-#define BUZZER 10
-#define LED2 8
+#define COUNT 5
+#define LED 7
+#define BUZZER 3
+#define LED2 A1
 
 void setup() {
   // put your setup code here, to run once:
@@ -16,24 +16,33 @@ void setup() {
   digitalWrite(LED, LOW);
 }
 
+int led_2 = 1;
+
 void loop() {
   // put your main code here, to run repeatedly:
   int up = digitalRead(COUNT);
-  int led2 = 0;
-  Serial.print("--");
-  Serial.println(up);
-  if(up == LOW)
+  
+  
+  if(up == HIGH)
   {
-    led2 = 1 - led2;
+    led_2 = 1 - led_2;
     
   }
-  if(led2 == 1)
+  Serial.print("----");
+  Serial.print(up);
+  Serial.print("----");
+  Serial.println(led_2);
+  if(led_2 == 1)
   {
     digitalWrite(LED2, HIGH);
   }
+  else
+  {
+    digitalWrite(LED2, LOW);
+  }
   int bite = analogRead(VIBE);
   Serial.println(bite);
-  if(bite > 900)
+  if(bite > 700)
   {
     for(int i = 0; i < 50; i++)
     {
@@ -54,4 +63,5 @@ void loop() {
   }
   digitalWrite(LED, LOW);
   noTone(BUZZER);
+  delay(300);
 }
