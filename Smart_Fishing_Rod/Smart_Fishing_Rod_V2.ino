@@ -7,7 +7,7 @@
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial.println("--------------------------");
+  Serial.println("------------SFR------------");
   pinMode(VIBE, INPUT);
   pinMode(COUNT, INPUT);
   pinMode(LED, OUTPUT);
